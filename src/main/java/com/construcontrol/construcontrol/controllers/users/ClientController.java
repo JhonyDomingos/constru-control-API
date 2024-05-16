@@ -40,14 +40,4 @@ public class ClientController {
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao criar o cliente: " + e.getMessage());
        }
    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteClientById(@PathVariable long id) {
-        try {
-            clientReposirtory.deleteById(id);
-            return ResponseEntity.ok("Cliente deletado com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao deletar o cliente: " + e.getMessage());
-        }
-    }
 }
-
