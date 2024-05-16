@@ -16,23 +16,16 @@ import lombok.*;
 
 public class Manager extends User {
 
-    @Column(name = "cpf", unique = true, nullable = false)
-    private String cpf;
-    @Column(name = "rg", unique = true, nullable = false)
-    private String rg;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Address address;
-
+    private UserType userType;
 
     public Manager(ManagerDTO ManagerDTO) {
         this.name = ManagerDTO.name();
         this.phone = ManagerDTO.phone();
         this.email = ManagerDTO.email();
-        this.cpf = ManagerDTO.cpf();
-        this.rg = ManagerDTO.rg();
-        super.setUserType(UserType.GESTOR);
-        this.address = createAddress(ManagerDTO.address());
+        this.setCpf(ManagerDTO.cpf());
+        this.setRg(ManagerDTO.rg());
+        this.setUserType(UserType.GESTOR);
+        this.setAddress(createAddress(ManagerDTO.address()));
 
     }
     private Address createAddress(AddressDTO addressDTO) {

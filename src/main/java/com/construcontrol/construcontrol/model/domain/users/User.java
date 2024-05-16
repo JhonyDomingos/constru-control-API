@@ -1,6 +1,7 @@
 package com.construcontrol.construcontrol.model.domain.users;
 
 import com.construcontrol.construcontrol.model.domain.users.enums.UserType;
+import com.construcontrol.construcontrol.shared.Address;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,10 +19,17 @@ public class User {
     private long id;
     @Column(name = "name")
     protected String name;
+    @Column(name = "cpf", unique = true, nullable = false)
+    protected String cpf;
+    @Column(name = "rg", unique = true, nullable = false)
+    protected String rg;
     @Column(name = "phone")
     protected String phone;
     @Column(unique = true, name = "email")
     protected String email;
     @Enumerated(EnumType.STRING)//
-    private UserType userType;
+    protected UserType userType;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    protected Address address;
 }
